@@ -1,36 +1,68 @@
-// Import the necessary modules
 const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-
-// Initialize the Express application
 const app = express();
-const PORT = 3000;
+const axios = require('axios')
+const path = require('path');
+app.use(express.json());
 
-// Use body-parser middleware to parse JSON requests
-app.use(bodyParser.json());
 
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
-// Route to handle login requests
-app.post('/api/auth', (req, res) => {
-  const { username, password } = req.body;
+app.get('/' ,(req,res) => {
+    res.sendFile(path.join(__dirname,'/public' ,'index.html'))
+})
 
-  // Simple authentication check (for demonstration purposes)
-  if (username === 'admin' && password === 'password') {
-    res.json({ message: 'Login successful!' });
-  } else {
-    res.json({ message: 'Invalid username or password.' });
-  }
+
+app.post('/api/v1/auth/Ad/verify', async (req, res) => {
+    const { UserName, PassWord } = req.body;  // Get UserName and PassWord from request body
+
+    if (!UserName || !PassWord) {
+        return res.status(400).send('UserName and PassWord are required.');
+    }
+
+    try {
+        console.log('Verifying credentials for UserName:', UserName);
+
+        // Sending the POST request to the external API with the credentials
+        const response = await axios.post(`https://restapi.tu.ac.th/api/v1/auth/Ad/verify`, {
+            UserName,
+            PassWord
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Application-Key': 'TU129223f3173ed3c073e7a59c015f51ac7ddc894de3267b7f37a8b2b2050572c3204be11c64765eb33aeb6b8e532336c9'
+            }
+        });
+
+        // Handle the response from the external API
+        const apiData = response.data;
+
+        // Create output object to send to the client
+        const output = {
+            timestamp: Date.now(),
+            status: apiData.status,
+            message: apiData.message,
+            data: apiData
+        };
+        console.log(output)
+        // console.log(PassWord,'and',UserName)
+
+        // console.log(res.json(output))
+        res.json(output)
+    } catch (err) {
+        console.error('Error verifying credentials:', err);
+
+        // Handle errors from the external API
+        if (err.response) {
+            return res.status(err.response.status).send(err.response.data);
+        }
+
+        res.status(500).send('An error occurred while verifying credentials.');
+    }
 });
 
-// Route for the root URL
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+const port = 3000;
+app.listen(port,() => {
+    console.log(`Server is running at ${port}`);
+    // console.log(path.join(__dirname,'/Frontend/public'))
+})

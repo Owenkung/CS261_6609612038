@@ -1,13 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
-  background-color: #b3cde0;
+  background: linear-gradient(to right, #b3cde0, #81a1c1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,10 +18,10 @@ body {
 .login-container {
   background-color: #e5e5e5;
   padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 350px;
-  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  width: 350px;
+  /* width: 100%; */
   text-align: center;
 }
 
@@ -34,26 +35,104 @@ body {
 h1 {
   font-size: 1.5em;
   margin-bottom: 10px;
-  color: #333;
+  color: #1c3b57;
 }
 
 input, select, button {
   width: 90%;
   margin: 10px 0;
   padding: 10px;
-  border-radius: 20px;
+  border-radius: 25px;
   border: 1px solid #ccc;
   font-size: 1em;
   outline: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+input:hover, select:hover {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: #81a1c1;
+}
+
+input:focus, select:focus {
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.7);
 }
 
 button {
-  background-color: #88c0d0;
+  background: linear-gradient(to right, #88c0d0, #81a1c1);
   color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(to right, #81a1c1, #88c0d0);
+}
+
+.wrapper {
+  padding: 10px 20px;
+  font-size: 10px;
+  color: #fff;
+  margin: 15px 0 15px 0;
+}
+
+.wrapper h1 {
+  margin-bottom: 10px;
+}
+
+.back {
+  width: 70%;
+  height: 50px;
+  font-size: 22px;
+  background-color: rgba(255, 209, 63, 0.7);
+  backdrop-filter: blur(10px);
+  border: none;
+  cursor: pointer;
+  border-radius: 15px;
+  color: #fff;
+  transition: .2s ease-in;
+  text-align: center;
+  align-items: center;
+  margin: 0 0 15px 0;
+}
+
+.back:hover {
+  background-color: rgba(255, 209, 63, 0.9);
+}
+
+.Text {
+  padding: 5px 10px;
+  font-size: 20px;
+}
+
+.success {
+  color: #4caf50;
+  font-size: 30px;
+}
+
+.show {
+  font-size: 15px;
+  text-align: center;
+  margin: 0 0 10px 0;
+  background: none;
+  color: #fff;
+  font-weight: 600;
   border: none;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #81a1c1;
+.show:hover {
+  border-bottom: 2px solid #fff;
+}
+
+.role #role {
+  border: none;
+  border-radius: 15px;
+  font-size: 15px;
+  padding: 10px 20px;
+  outline: none;
+  cursor: pointer;
+  background-color: rgba(255, 209, 63, 0.7);
+  color: #ffffff;
 }
