@@ -16,14 +16,19 @@
       <div class="login-content" id="login-content"> 
         <form >
           <input type="text" placeholder="Username" required id="text">
-          <input type="password" placeholder="Password" required id="password">
+          <div class="password-container">
+            <input type="password" placeholder="Password" required id="password">
+          </div>
+          <div class="show-password">
+            <input type="checkbox" id="show-password-checkbox">
+            <label for="show-password-checkbox">Show Password</label>
+          </div>
         </form>
         <select name="Role" id="role">
           <option value="">Select Role</option>
-          <option value="Students">Students</option>
-          <option value="Employees">Employees</option>
+          <option value="Students">นักศึกษา</option>
+          <option value="Employees">บุลคลากร</option>
         </select>
-        <button class="show" id="show">Show Password</button>
         <button id="submit" class="submit">Login</button>
       </div>
     </div>

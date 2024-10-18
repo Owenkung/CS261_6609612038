@@ -1,19 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
   const text = document.getElementById('text');
   const password = document.getElementById('password');
+  const showPasswordCheckbox = document.getElementById('show-password-checkbox');
   const submit = document.getElementById('submit');
-  const show = document.getElementById('show');
   const role = document.getElementById('role');
   const loginContent = document.getElementById('login-content');
   let isPasswordVisible = false;
 
-  // Show/Hide Password
-  show.addEventListener('click', (event) => {
-      event.preventDefault();
-      isPasswordVisible = !isPasswordVisible;
-      password.type = isPasswordVisible ? 'text' : 'password';
-      show.textContent = isPasswordVisible ? 'Hide Password' : 'Show Password';
-  });
+  // Toggle password visibility
+  showPasswordCheckbox.addEventListener('change', (event) => {
+    password.type = event.target.checked ? 'text' : 'password';
+});
 
   // Handle Login Submission
   submit.addEventListener('click', async (event) => {
